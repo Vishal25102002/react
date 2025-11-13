@@ -751,6 +751,11 @@ export function handleInstruction(
     for (const operand of eachInstructionValueOperand(value)) {
       context.visitOperand(operand);
     }
+  } else if (value.kind === 'PostfixUpdate' || value.kind === 'PrefixUpdate') {
+    // Track the read side
+    context.visitOperand(value.value);
+    // Track the write/mutation side
+    context.visitReassignment(value.lvalue);
   } else {
     for (const operand of eachInstructionValueOperand(value)) {
       context.visitOperand(operand);
