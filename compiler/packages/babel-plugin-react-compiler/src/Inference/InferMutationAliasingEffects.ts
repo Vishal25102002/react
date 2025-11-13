@@ -2318,6 +2318,11 @@ function computeSignatureForInstruction(
     }
     case 'PostfixUpdate':
     case 'PrefixUpdate': {
+      // Track mutation of the operand being incremented/decremented
+      effects.push({
+        kind: 'Mutate',
+        value: value.lvalue,
+      });
       effects.push({
         kind: 'Create',
         into: lvalue,
