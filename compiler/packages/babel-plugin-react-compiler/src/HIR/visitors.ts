@@ -228,6 +228,7 @@ export function* eachInstructionValueOperand(
     case 'PostfixUpdate':
     case 'PrefixUpdate': {
       yield instrValue.value;
+      yield instrValue.lvalue;
       break;
     }
     case 'StartMemoize': {
